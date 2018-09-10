@@ -1,6 +1,7 @@
 package ws;
 
 import com.google.gson.Gson;
+import dao.ServicesDAO;
 import dao.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.Usuario;
+import modelo.Services;
 
 /**
  * REST Web Service
@@ -73,6 +75,24 @@ public class BarbershopAPI {
         return g.toJson(lista);
             
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Services/List")
+    public String listServices(){
+        
+        List<Services> lista;
+        
+        ServicesDAO dao = new ServicesDAO();
+        lista = dao.listar();
+             
+        
+        Gson g = new Gson();        
+        return g.toJson(lista);
+            
+    }    
+    
+    
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
