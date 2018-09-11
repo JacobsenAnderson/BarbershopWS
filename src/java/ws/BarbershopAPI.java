@@ -36,7 +36,7 @@ public class BarbershopAPI {
     public BarbershopAPI() {
         
     }
-    
+    /*BLOCO USUARIO*/
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
@@ -69,30 +69,11 @@ public class BarbershopAPI {
         
         UsuarioDAO dao = new UsuarioDAO();
         lista = dao.listar();
-             
-        
+                
         Gson g = new Gson();        
         return g.toJson(lista);
             
     }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("Services/List")
-    public String listServices(){
-        
-        List<Services> lista;
-        
-        ServicesDAO dao = new ServicesDAO();
-        lista = dao.listar();
-             
-        
-        Gson g = new Gson();        
-        return g.toJson(lista);
-            
-    }    
-    
-    
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -127,4 +108,24 @@ public class BarbershopAPI {
         UsuarioDAO dao = new UsuarioDAO();
         dao.atualizar(u);
     }
+    
+    
+    /*BLOCO SERVICES*/
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Services/List")
+    public String listServices(){
+        
+        List<Services> lista;
+        
+        ServicesDAO dao = new ServicesDAO();
+        lista = dao.listar();
+             
+        
+        Gson g = new Gson();        
+        return g.toJson(lista);
+            
+    }     
+    
+   
 }
