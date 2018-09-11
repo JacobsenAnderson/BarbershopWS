@@ -78,7 +78,7 @@ public class BarbershopAPI {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/Inserir")
-    public void inserir(String content){
+    public void inserirUsuario(String content){
         Gson g = new Gson();
         Usuario u = (Usuario) g.fromJson(content, Usuario.class);
         UsuarioDAO dao = new UsuarioDAO();
@@ -111,6 +111,7 @@ public class BarbershopAPI {
     
     
     /*BLOCO SERVICES*/
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Services/List")
@@ -125,7 +126,16 @@ public class BarbershopAPI {
         Gson g = new Gson();        
         return g.toJson(lista);
             
-    }     
-    
-   
+    } 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Services/Inserir")
+    public void inserirService(String content){
+        Gson g = new Gson();
+        Services u = (Services) g.fromJson(content, Services.class);
+        ServicesDAO dao = new ServicesDAO();
+        dao.inserir(u);          
+    }
+        
+       
 }
