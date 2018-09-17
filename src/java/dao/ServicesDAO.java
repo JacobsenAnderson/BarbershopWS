@@ -49,7 +49,7 @@ public class ServicesDAO {
         return retorno;
     }
     
-    /*INSERIR SERVICES FAZER*/
+    /*INSERIR SERVICES PRONTO*/
     public boolean inserir(Services service)
     {
         String sql = "INSERT INTO tabelas.tb_services(desc_service,valor,services_tempo) VALUES(?,?,?)";
@@ -74,7 +74,29 @@ public class ServicesDAO {
     }
     
     /*ALTERAR SERVICES FAZER*/
-    
+    public boolean atualizar(Services service)
+    {
+        String sql = "UPDATE tabelas.tb_services set desc_service=?,valor=?,services_tempo=? where desc_service=?";
+        
+        Boolean retorno = false;
+        PreparedStatement pst = Conexao.getPreparedStatement(sql);
+        try {
+          
+            pst.setString(1, service.getDescricao());
+            pst.setString(2, service.getValor());
+            pst.setString(3, service.getTempo());
+            
+            if(pst.executeUpdate()>0)
+            {
+                retorno = true;
+            }             
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            retorno = false;
+        }        
+        return retorno;    
+    }
     
     
     

@@ -102,7 +102,7 @@ public class BarbershopAPI {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("Usuario/Alterar")
-    public void alterar(String content) {
+    public void alterarUsuario(String content) {
         Gson g = new Gson();
         Usuario u = (Usuario) g.fromJson(content, Usuario.class);
         UsuarioDAO dao = new UsuarioDAO();
@@ -135,6 +135,15 @@ public class BarbershopAPI {
         Services u = (Services) g.fromJson(content, Services.class);
         ServicesDAO dao = new ServicesDAO();
         dao.inserir(u);          
+    }
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("Services/Alterar")
+    public void alterarService(String content) {
+        Gson g = new Gson();
+        Services u = (Services) g.fromJson(content, Services.class);
+        ServicesDAO dao = new ServicesDAO();
+        dao.atualizar(u);
     }
         
        

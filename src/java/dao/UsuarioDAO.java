@@ -161,17 +161,13 @@ public class UsuarioDAO {
             if(pst.executeUpdate()>0)
             {
                 retorno = true;
-            }
-                
-            
-            
+            }             
+                        
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             retorno = false;
-        }
-        
-        return retorno;
-    
+        }        
+        return retorno;    
     }
     
 
