@@ -48,6 +48,36 @@ public class ServicesDAO {
         }
         return retorno;
     }
+        /*BUSCAR USUARIO PRONTO*/
+    public Services buscar(Services service)
+    {
+         String sql = "SELECT * FROM tabelas.tb_services where desc_service=?";
+        Services item = null;
+        
+        PreparedStatement pst = Conexao.getPreparedStatement(sql);
+        try {
+           
+            pst.setString(1, service.getDescricao());
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next())
+            {
+                item = new Services();
+                item.setService_id(res.getInt("service_id"));
+                item.setDescricao(res.getString("desc_service"));
+                item.setValor(res.getString("valor"));
+                item.setTempo(res.getString("services_tempo"));
+                                
+            }   
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }        
+        return item;   
+    
+    }    
+    
     
     /*INSERIR SERVICES PRONTO*/
     public boolean inserir(Services service)
@@ -73,7 +103,7 @@ public class ServicesDAO {
         return retorno;
     }
     
-    /*ALTERAR SERVICES FAZER*/
+    /*ALTERAR SERVICES PRONTO*/
     public boolean atualizar(Services service)
     {
         String sql = "UPDATE tabelas.tb_services set desc_service=?,valor=?,services_tempo=? where desc_service=?";
@@ -85,6 +115,7 @@ public class ServicesDAO {
             pst.setString(1, service.getDescricao());
             pst.setString(2, service.getValor());
             pst.setString(3, service.getTempo());
+            pst.setString(4, service.getDescricao());
             
             if(pst.executeUpdate()>0)
             {
@@ -92,7 +123,7 @@ public class ServicesDAO {
             }             
                         
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
             retorno = false;
         }        
         return retorno;    
@@ -102,7 +133,26 @@ public class ServicesDAO {
     
     
     /*EXCLUIR SERVICES FAZER*/
+    public boolean excluir(Services service)
+    {
+        String sql = "DELETE FROM tabelas.tb_services where desc_service=?";
+        Boolean retorno = false;
+        PreparedStatement pst = Conexao.getPreparedStatement(sql);
+        try {                     
+            pst.setString(1, service.getDescricao());
+            if(pst.executeUpdate()>0)
+            {
+                retorno = true;
+            }          
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            retorno = false;
+        }
+        
+        return retorno;
     
+    }    
     
     
     

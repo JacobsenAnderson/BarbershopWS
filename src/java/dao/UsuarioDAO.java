@@ -74,19 +74,14 @@ public class UsuarioDAO {
                 retorno.setNome(res.getString("nome"));
                 retorno.setTelefone(res.getString("telefone"));
                 retorno.setUser_id(res.getInt("user_id"));
-                
-                
-            }
-               
-            
+                                
+            }   
             
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             
-        }
-        
-        return retorno;
-    
+        }        
+        return retorno;   
     
     }
 

@@ -88,7 +88,7 @@ public class BarbershopAPI {
     
     @DELETE
     @Path("Usuario/Excluir/{login}")
-    public boolean excluir(@PathParam("login") String login){
+    public boolean excluirUsuario(@PathParam("login") String login){
         
         Usuario u = new Usuario();
         u.setLogin(login);
@@ -145,6 +145,20 @@ public class BarbershopAPI {
         ServicesDAO dao = new ServicesDAO();
         dao.atualizar(u);
     }
+    
+    @DELETE
+    @Path("Services/Excluir/{service}")
+    public boolean excluirServices(@PathParam("service") String service){
+        
+        Services u = new Services();
+        u.setDescricao(service);
+        
+        ServicesDAO dao = new ServicesDAO();
+        u = dao.buscar(u);
+        return dao.excluir(u);
+            
+    }
+    
         
        
 }
