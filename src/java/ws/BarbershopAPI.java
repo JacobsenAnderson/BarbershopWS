@@ -159,6 +159,23 @@ public class BarbershopAPI {
             
     }
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Services/Get/{service}")
+    public String getServices(@PathParam("service") String service){
+        
+        Services u = new Services();
+        
+        u.setDescricao(service);
+        
+        ServicesDAO dao = new ServicesDAO();
+        u = dao.buscar(u);
+        
+        Gson g = new Gson();        
+        return g.toJson(u);
+            
+    }
+    
         
        
 }
